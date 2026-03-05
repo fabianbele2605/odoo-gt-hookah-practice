@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Editors / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Local env files
+.env
+.env.*
+
+# Odoo runtime artifacts
+*.log
+
+# Postgres/Odoo persistent data (if local folders are used)
+odoo-db-data/
+odoo-web-data/

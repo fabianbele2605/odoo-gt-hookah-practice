@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_gt_hookah_qty_break_tree" model="ir.ui.view">
+        <field name="name">gt.hookah.qty.break.tree</field>
+        <field name="model">gt.hookah.qty.break</field>
+        <field name="arch" type="xml">
+            <list string="Quantity Breaks">
+                <field name="product_id"/>
+                <field name="min_qty"/>
+                <field name="price"/>
+                <field name="company_id"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_gt_hookah_qty_break_form" model="ir.ui.view">
+        <field name="name">gt.hookah.qty.break.form</field>
+        <field name="model">gt.hookah.qty.break</field>
+        <field name="arch" type="xml">
+            <form string="Quantity Break">
+                <sheet>
+                    <group>
+                        <field name="product_id"/>
+                        <field name="min_qty"/>
+                        <field name="price"/>
+                        <field name="company_id"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_gt_hookah_qty_break" model="ir.actions.act_window">
+        <field name="name">Quantity Breaks</field>
+        <field name="res_model">gt.hookah.qty.break</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_gt_hookah_qty_breaks" name="Quantity Breaks" parent="menu_gt_hookah_pricing_root" action="action_gt_hookah_qty_break" sequence="20"/>
+</odoo>

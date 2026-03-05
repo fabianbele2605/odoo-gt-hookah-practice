@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form_inherit_gt_hookah_core" model="ir.ui.view">
+        <field name="name">sale.order.form.gt.hookah.core</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="order_source"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_sales_order_filter_inherit_gt_hookah_core" model="ir.ui.view">
+        <field name="name">sale.order.search.gt.hookah.core</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <separator/>
+                <filter name="order_source_web_woo" string="WEB_WOO" domain="[('order_source', '=', 'web_woo')]"/>
+                <filter name="order_source_sales_rep" string="SALES_REP" domain="[('order_source', '=', 'sales_rep')]"/>
+                <filter name="order_source_pos" string="POS" domain="[('order_source', '=', 'pos')]"/>
+                <filter name="order_source_backoffice" string="BACKOFFICE" domain="[('order_source', '=', 'backoffice')]"/>
+                <filter name="order_source_crm_handoff" string="CRM_HANDOFF" domain="[('order_source', '=', 'crm_handoff')]"/>
+                <separator/>
+                <filter name="group_by_order_source" string="Agrupar por Origen" context="{'group_by': 'order_source'}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
