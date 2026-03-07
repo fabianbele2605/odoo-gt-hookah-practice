@@ -10,7 +10,11 @@ class SaleOrderLine(models.Model):
             if not line.product_id or not line.order_id.partner_id:
                 continue
 
-            # Priority 1: customer-product special price
+            priority = self.env["ir.config_parameter"].sudo().get_param(
+                "gt_hookah_pricing.priority",
+                default="special_product_qty_category",
+            )
+
             special_rule = self.env["gt.hookah.pricing.rule"].search(
                 [
                     ("partner_id", "=", line.order_id.partner_id.id),
@@ -24,8 +28,7 @@ class SaleOrderLine(models.Model):
                 line.price_unit = special_rule.special_price
                 continue
 
-            # Priority 2: quantity break by product
-            qty_break = self.env["gt.hookah.qty.break"].search(
+            product_qty_break = self.env["gt.hookah.qty.break"].search(
                 [
                     ("product_id", "=", line.product_id.id),
                     ("company_id", "=", line.order_id.company_id.id),
@@ -35,12 +38,7 @@ class SaleOrderLine(models.Model):
                 order="min_qty desc",
                 limit=1,
             )
-            if qty_break:
-                line.price_unit = qty_break.price
-                continue
 
-
-            # Priority 3: quantity break by category
             category_qty_break = self.env["gt.hookah.category.qty.break"].search(
                 [
                     ("categ_id", "=", line.product_id.categ_id.id),
@@ -51,5 +49,17 @@ class SaleOrderLine(models.Model):
                 order="min_qty desc",
                 limit=1,
             )
-            if category_qty_break:
-                line.price_unit = category_qty_break.price
+
+            if priority == "special_category_product":
+                if category_qty_break:
+                    line.price_unit = category_qty_break.price
+                    continue
+                if product_qty_break:
+                    line.price_unit = product_qty_break.price
+                    continue
+            else:
+                if product_qty_break:
+                    line.price_unit = product_qty_break.price
+                    continue
+                if category_qty_break:
+                    line.price_unit = category_qty_break.price

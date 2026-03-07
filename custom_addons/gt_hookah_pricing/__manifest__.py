@@ -10,6 +10,7 @@
         "views/pricing_rule_views.xml",
         "views/qty_break_views.xml",
         "views/category_qty_break_views.xml",
+        "views/res_config_settings_views.xml",
     ],
     "installable": True,
     "application": False,

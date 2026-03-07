@@ -20,6 +20,8 @@ Matriz base de pruebas funcionales para la práctica de Odoo GT Hookah.
 | TM-07 | Qty break por producto | Producto Prueba + qty 5 + precio 8, sin special price | `price_unit = 8.00` | OK |
 | TM-08 | Prioridad special price sobre qty break producto | Cliente Prueba + Producto Prueba + qty 5 | `price_unit = 10.00` | OK |
 | TM-09 | Qty break por categoría | Categoría de Producto Prueba + qty 3 + precio 7 | `price_unit = 7.00` cuando no hay special ni qty break de producto | OK |
+| TM-10 | Prioridad configurable categoría > producto | Qty break producto = 9, qty break categoría = 7, prioridad categoría primero | `price_unit = 7.00` | OK |
+| TM-11 | Prioridad configurable producto > categoría | Qty break producto = 9, qty break categoría = 7, prioridad producto primero | `price_unit = 9.00` | OK |
 
 ## Prioridad actual del motor
 
@@ -31,8 +33,8 @@ Matriz base de pruebas funcionales para la práctica de Odoo GT Hookah.
 
 | ID | Escenario | Motivo |
 | --- | --- | --- |
-| TM-10 | Cantidad menor al mínimo de categoría | Validar que mantenga precio base |
-| TM-11 | Múltiples qty breaks por producto | Confirmar que toma el `min_qty` más alto aplicable |
-| TM-12 | Múltiples qty breaks por categoría | Confirmar que toma el `min_qty` más alto aplicable |
-| TM-13 | Multiempresa | Validar aislamiento por `company_id` |
-| TM-14 | Categorías jerárquicas | Definir si debe heredar reglas desde categorías padre |
+| TM-12 | Cantidad menor al mínimo de categoría | Validar que mantenga precio base |
+| TM-13 | Múltiples qty breaks por producto | Confirmar que toma el `min_qty` más alto aplicable |
+| TM-14 | Múltiples qty breaks por categoría | Confirmar que toma el `min_qty` más alto aplicable |
+| TM-15 | Multiempresa | Validar aislamiento por `company_id` |
+| TM-16 | Categorías jerárquicas | Definir si debe heredar reglas desde categorías padre |

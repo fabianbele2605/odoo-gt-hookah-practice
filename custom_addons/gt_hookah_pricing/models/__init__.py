@@ -2,4 +2,5 @@ from . import pricing_rule
 from . import sale_order_line
 from . import qty_break
 from . import category_qty_break
+from . import res_config_settings
 

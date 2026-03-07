@@ -34,6 +34,7 @@ Comportamiento validado:
 - Si existe precio especial activo, gana sobre cualquier quantity break.
 - Si no existe precio especial, aplica quantity break por producto.
 - Si no existe precio especial ni quantity break por producto, aplica quantity break por categoría.
+- La prioridad entre quantity break por producto y por categoría se puede configurar desde `Ajustes > Ventas`.
 
 ## Estructura
 
@@ -53,6 +54,7 @@ Modelos creados en `gt_hookah_pricing`:
 - `gt.hookah.pricing.rule`
 - `gt.hookah.qty.break`
 - `gt.hookah.category.qty.break`
+- Extensión de `res.config.settings` para prioridad configurable
 
 ## Requisitos
 
@@ -125,6 +127,18 @@ docker compose restart odoo
 5. Asegurar que `Producto Prueba` use esa categoría
 6. En cotización con qty `3`, verificar `price_unit = 7`
 
+### F. Prioridad configurable
+
+1. Ir a `Ajustes > Ventas`
+2. Buscar `GT Hookah Pricing`
+3. Seleccionar una prioridad:
+   - `Special > Product Qty Break > Category Qty Break`
+   - `Special > Category Qty Break > Product Qty Break`
+4. Guardar
+5. Probar una cotización donde existan ambas reglas:
+   - con prioridad categoría > producto, debe ganar la categoría
+   - con prioridad producto > categoría, debe ganar producto
+
 ## Git
 
 Subir cambios:
@@ -141,7 +155,6 @@ git push
 
 ## Próximos pasos sugeridos
 
-- Prioridad configurable (no hardcoded)
 - Quantity break por categoría de forma más robusta con categorías jerárquicas
 - Matriz de pruebas extendida (10 a 30 escenarios)
 - Base para integración Woo ↔ Odoo con logs e idempotencia

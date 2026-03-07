@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_gt_hookah_pricing" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.gt.hookah.pricing</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="sale.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app string="Sales" data-string="Sales" name="sale">
+                    <block title="GT Hookah Pricing">
+                        <setting id="gt_pricing_priority_setting" string="Pricing Priority">
+                            <field name="gt_pricing_priority"/>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>
