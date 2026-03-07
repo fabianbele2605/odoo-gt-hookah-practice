@@ -9,6 +9,7 @@
         "security/ir.model.access.csv",
         "views/pricing_rule_views.xml",
         "views/qty_break_views.xml",
+        "views/category_qty_break_views.xml",
     ],
     "installable": True,
     "application": False,

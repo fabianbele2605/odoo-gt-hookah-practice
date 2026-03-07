@@ -37,3 +37,19 @@ class SaleOrderLine(models.Model):
             )
             if qty_break:
                 line.price_unit = qty_break.price
+                continue
+
+
+            # Priority 3: quantity break by category
+            category_qty_break = self.env["gt.hookah.category.qty.break"].search(
+                [
+                    ("categ_id", "=", line.product_id.categ_id.id),
+                    ("company_id", "=", line.order_id.company_id.id),
+                    ("active", "=", True),
+                    ("min_qty", "<=", line.product_uom_qty or 0.0),
+                ],
+                order="min_qty desc",
+                limit=1,
+            )
+            if category_qty_break:
+                line.price_unit = category_qty_break.price
